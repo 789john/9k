@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Master - Treino e Nutrição</title>
+    <style>
+        /* Estilo geral do site */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1d;
+            color: #eee;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        .container h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 20px;
+            font-size: 2em;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2:before {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: #FF5722;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #444;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            background-color: #222;
+            color: #fff;
+        }
+        th {
+            background-color: #4CAF50;
+            font-weight: bold;
+        }
+        .day {
+            background-color: #3a3a3d;
+        }
+        .calories-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #2c2c2e;
+            border-radius: 10px;
+        }
+        .calories-result {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .macronutrients {
+            font-size: 16px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+            background-color: #444;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        ul li:hover {
+            background-color: #555;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        /* Animação de Fade In */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container, .calories-section, h2 {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Botão flutuante de treino */
+        .toggle-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .toggle-btn:hover {
+            background-color: #45a049;
+        }
+
+        .exercise-details {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        /* Design responsivo */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+    <script>
+        // Função para alternar a exibição dos detalhes do treino
+        function toggleDetails(id) {
+            const element = document.getElementById(id);
+            if (element.classList.contains('visible')) {
+                element.classList.remove('visible');
+            } else {
+                element.classList.add('visible');
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Fitness Master</h1>
+        <p>Bem-vindo ao seu plano de treino e nutrição. Acompanhe sua evolução e maximize seus resultados!</p>
+        
+        <!-- Seção de Treino -->
+        <h2>Segunda-feira: Peito e Tríceps</h2>
+        <button class="toggle-btn" onclick="toggleDetails('segunda-details')">Ver detalhes do treino</button>
+        <div id="segunda-details" class="exercise-details">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exercício</th>
+                        <th>Séries</th>
+                        <th>Repetições</th>
+                        <th>Peso Sugerido (kg)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="day">
+                        <td>Supino Reto</td>
+                        <td>4</td>
+                        <td>8-10</td>
+                        <td>60 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Supino Inclinado</td>
+                        <td>4</td>
+                        <td>10-12</td>
+                        <td>50 kg</td>
+                    </tr>
+                    <tr class="day">
+                        <td>Crucifixo com Halteres</td>
+                        <td>3</td>
+                        <td>12-15</td>
+                        <td>15 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Tríceps Testa</td>
+                        <td>4</td>
+                        <td>10-12</td>
+                        <td>30 kg</td>
+                    </tr>
+                    <tr class="day">
+                        <td>Tríceps Pulley</td>
+                        <td>4</td>
+                        <td>10-12</td>
+                        <td>25 kg</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Terça-feira: Costas e Bíceps</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exercício</th>
+                        <th>Séries</th>
+                        <th>Repetições</th>
+                        <th>Peso Sugerido (kg)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="day">
+                        <td>Barra Fixa</td>
+                        <td>4</td>
+                        <td>8-10</td>
+                        <td>Corpo Livre</td>
+                    </tr>
+                    <tr>
+                        <td>Remada Curvada</td>
+                        <td>4</td>
+                        <td>8-10</td>
+                        <td>50 kg</td>
+                    </tr>
+                    <tr class="day">
+                        <td>Puxada Frontal</td>
+                        <td>4</td>
+                        <td>10-12</td>
+                        <td>40 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Rosca Direta</td>
+                        <td>4</td>
+                        <td>10-12</td>
+                        <td>20 kg</td>
+                    </tr>
+                    <tr class="day">
+                        <td>Rosca Alternada com Halteres</td>
+                        <td>3</td>
+                        <td>12-15</td>
+                        <td>12 kg</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Quarta-feira: Pernas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exercício</th>
+                        <th>Séries</th>
+                        <th>Repetições</th>
+                        <th>Peso Sugerido (kg)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="day">
+                        <td>Agachamento Livre</td>
+                        <td>4</td>
+                        <td>8-10</td>
+                        <td>80 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Leg Press</td>
+                        <td>4</td>
+                        <td>10-12</td>
+                        <td>150 kg</td>
+                    </tr>
+                    <tr class="day">
+                        <td>Cadeira Extensora</td>
+                        <td>4</td>
+                        <td>12-15</td>
+                        <td>50 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Cadeira Flexora</td>
+                        <td>4</td>
+                        <td>12-15</td>
+                        <td>45 kg</td>
+                    </tr>
+                    <tr class="day">
+                        <td>Levantamento Terra</td>
+                        <td>4</td>
+                        <td>8-10</td>
+                        <td>90 kg</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Quinta-feira: Ombros</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exercício</th>
+                        <th>Séries</th>
+                        <th>Repetições</th>
+                        <th>Peso Sugerido (kg)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="day">
+                        <td>Desenvolvimento com Halteres</td>
+                        <td>4</td>
+                        <td>8-10</td>
+                        <td>20 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Elevação Lateral</td>
+                        <td>4</td>
+                        <td>12-15</td>
+                        <td>10 kg</td>
+                    </tr>
+                    <tr class="day">
+                        <td>Elevação Frontal</td>
+                        <td>4</td>
+                        <td>12-15</td>
+                        <td>8 kg</td>
+                    </tr>
+                    <tr>
+                        <td>Face Pull</td>
+                        <td>3</td>
+                        <td>12-15</td>
+                        <td>25 kg</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Sexta-feira: Treino Funcional/HIIT</h2>
+            <p>Dia dedicado a exercícios de alta intensidade (HIIT) ou circuitos funcionais focados em queima de gordura e condicionamento físico geral. Realize 5-6 exercícios em um circuito de 4 rodadas com 30 segundos de descanso entre os exercícios.</p>
+        </div>
+
+        <!-- Mais dias de treino podem seguir o mesmo padrão -->
+
+        <!-- Seção de Alimentação -->
+        <div class="calories-section">
+            <h2>Alimentação Diária para Ganho de Massa</h2>
+            <p>Você é um ectomorfo com 1,85m e 69kg, e treina de 1 a 3 horas por dia. Para ganho de massa muscular, é essencial consumir mais calorias do que gasta diariamente.</p>
+            
+            <h3>Necessidades Diárias de Calorias:</h3>
+            <div class="calories-result">
+                <p><strong>Metabolismo Basal:</strong> 1.750 kcal (aproximado)</p>
+                <p><strong>Calorias Gastas no Treino (1-3h):</strong> 500-900 kcal</p>
+                <p><strong>Calorias Diárias Recomendadas:</strong> 3.200-3.500 kcal (para ganho de massa)</p>
+            </div>
+
+            <h3>Divisão de Macronutrientes:</h3>
+            <div class="macronutrients">
+                <p><strong>Proteínas:</strong> 2g por kg de peso corporal (~140g de proteína)</p>
+                <p><strong>Carboidratos:</strong> 5-6g por kg de peso corporal (~345g de carboidratos)</p>
+                <p><strong>Gorduras:</strong> 1g por kg de peso corporal (~69g de gorduras)</p>
+            </div>
+
+            <h3>Sugestão de Refeições:</h3>
+            <ul>
+                <li><strong>Café da manhã:</strong> Ovos mexidos com aveia, frutas, e uma fonte de proteína (whey ou peito de frango).</li>
+                <li><strong>Almoço:</strong> Arroz integral, peito de frango, legumes e abacate.</li>
+                <li><strong>Lanches:</strong> Frutas, castanhas e iogurte grego.</li>
+                <li><strong>Jantar:</strong> Batata doce, carne vermelha ou peixe, e salada.</li>
+                <li><strong>Pós-treino:</strong> Shake de proteína com banana e aveia.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
